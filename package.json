@@ -1,0 +1,15 @@
+{
+  "name": "reactive-node",
+  "version": "0.0.0",
+  "description": "Bridge between node streams and bacon streams",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": " ",
+  "dependencies": {
+    "baconjs": "~0.7.30",
+    "through": "~2.3.6"
+  }
+}

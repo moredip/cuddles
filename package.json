@@ -10,6 +10,10 @@
   "license": " ",
   "dependencies": {
     "baconjs": "~0.7.30",
-    "through": "~2.3.6"
+    "through": "~2.3.6",
+    "transducers-js": "~0.4.135"
+  },
+  "devDependencies": {
+    "request": "~2.47.0"
   }
 }

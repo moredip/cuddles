@@ -49,10 +49,15 @@ module.exports = function(Bacon){
   var pipeInto_MP = function(nodeStream){
     return baconToNode(this).pipe( nodeStream );
   };
+  var fromNodeStream_MP = function(nodeStream){
+    return nodeToBacon(nodeStream);
+  };
 
   var monkeyPatchBacon = function(){
     Bacon.Observable.prototype.pipeInto = pipeInto_MP;
+    Bacon.fromNodeStream = fromNodeStream_MP;
   };
+
 
   return {
     nodeToBacon: nodeToBacon,

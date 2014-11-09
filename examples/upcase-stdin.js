@@ -5,5 +5,6 @@ Cuddles.monkeyPatchBacon();
 
 var upcase = function(x){ return x.toString().toUpperCase() };
 
-var upcasedBacon = Cuddles.nodeToBacon( process.stdin ).map( upcase );
-upcasedBacon.pipeInto( process.stdout );
+Bacon.fromNodeStream( process.stdin )
+  .map( upcase )
+  .pipeInto( process.stdout );

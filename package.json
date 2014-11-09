@@ -1,5 +1,5 @@
 {
-  "name": "reactive-node",
+  "name": "cuddles",
   "version": "0.0.0",
   "description": "Bridge between node streams and bacon streams",
   "main": "index.js",

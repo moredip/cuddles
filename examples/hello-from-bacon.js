@@ -1,6 +1,8 @@
 var Bacon = require('baconjs').Bacon,
-    Cuddles = require('../index.js');
+    Cuddles = require('../index.js')(Bacon);
+
+Cuddles.monkeyPatchBacon();
 
 var baconStream = Bacon.sequentially(100, ["B", "A", "C", "O", "N"]);
 
-Cuddles.baconToNode(baconStream).pipe( process.stdout );
+baconStream.pipeInto( process.stdout );

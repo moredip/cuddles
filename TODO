@@ -1,0 +1,3 @@
+- helper/monkey patch to 
+ - convert node to bacon
+ - nodeStream.asBacon( process.stdout )

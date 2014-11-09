@@ -1,12 +1,11 @@
 'use strict';
 
 var through = require('through');
-var Bacon = require('baconjs').Bacon;
 var Stream = require('stream');
 var request = require('request');
 
-module.exports = { 
-  nodeToBacon: function(nodeStream){
+module.exports = function(Bacon){
+  var nodeToBacon = function(nodeStream){
     var baconStream = Bacon.fromBinder( function(sink){
       nodeStream.on( 'data', function(buf){
         sink(buf);
@@ -28,8 +27,9 @@ module.exports = {
     });
 
     return baconStream;
-  },
-  baconToNode: function(baconStream){
+  };
+  
+  var baconToNode = function(baconStream){
     var nodeStream = through();
 
     baconStream.onValue( function(val){
@@ -44,5 +44,19 @@ module.exports = {
     });
      //todo: onError
     return nodeStream;
-  }
+  };
+
+  var pipeInto_MP = function(nodeStream){
+    return baconToNode(this).pipe( nodeStream );
+  };
+
+  var monkeyPatchBacon = function(){
+    Bacon.Observable.prototype.pipeInto = pipeInto_MP;
+  };
+
+  return {
+    nodeToBacon: nodeToBacon,
+    baconToNode: baconToNode,
+    monkeyPatchBacon: monkeyPatchBacon
+  };
 };

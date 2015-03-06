@@ -2,7 +2,6 @@
 
 var through = require('through');
 var Stream = require('stream');
-var request = require('request');
 
 module.exports = function(Bacon){
   var nodeToBacon = function(nodeStream){

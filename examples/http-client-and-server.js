@@ -2,10 +2,10 @@ var Bacon = require('baconjs').Bacon,
     Cuddles = require('../index.js')(Bacon),
     http = require('http'),
     parseUrl = require('url').parse,
-    request = require('request');
+    request = require('request'),
+    JSONStream = require('JSONStream');
 
 Cuddles.monkeyPatchBacon();
-Cuddles.monkeyPatchNodesStreams(require('stream'));
 
 var server = http.createServer( function(req,res) {
   var artistName = parseUrl(req.url).pathname.split("/")[1];
@@ -24,12 +24,13 @@ console.log("SERVER LISTENING ON PORT "+port);
 server.listen(port);
   
 function relatedArtistStream(artist){
-  //return request.get( urlForArtistsRelatedTo(artist) );
-  return require('fs').createReadStream('/Users/phodgson/tmp/related-artists.json')
-    .asBaconStream()
-    .map( JSON.parse )
-    .map( pluckArtistNamesFromResponse )
-    .flatMap( Bacon.fromArray )
+  var artistsStream = 
+    //require('fs').createReadStream('/Users/phodgson/tmp/related-artists.json')
+    request.get(urlForArtistsRelatedTo(artist))
+      .pipe(JSONStream.parse("artists.*"));
+
+   return Cuddles.nodeToBacon( artistsStream )
+    .map( ".name" );
 }
 
 function urlForArtistsRelatedTo(artistId){

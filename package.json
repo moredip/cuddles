@@ -1,6 +1,6 @@
 {
   "name": "cuddles",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Bridge between node streams and bacon streams",
   "main": "index.js",
   "scripts": {
@@ -14,6 +14,7 @@
     "transducers-js": "~0.4.135"
   },
   "devDependencies": {
-    "request": "~2.47.0"
+    "request": "~2.47.0",
+    "JSONStream": "^1.0.4"
   }
 }

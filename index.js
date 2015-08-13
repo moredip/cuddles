@@ -2,7 +2,9 @@
 
 var through = require('through');
 
-module.exports = function(Bacon){
+module.exports = function(Bacon,monkeyPatchBaconNow){
+  monkeyPatchBaconNow = !!monkeyPatchBaconNow; // default to false
+
   var nodeToBacon = function(nodeStream){
     var baconStream = Bacon.fromBinder( function(sink){
       nodeStream.on( 'data', function(buf){
@@ -55,6 +57,9 @@ module.exports = function(Bacon){
     Bacon.Observable.prototype.pipeInto = pipeInto_MP;
     Bacon.fromNodeStream = fromNodeStream_MP;
   };
+
+  if( monkeyPatchBaconNow )
+    monkeyPatchBacon();
 
   return {
     nodeToBacon: nodeToBacon,

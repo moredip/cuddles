@@ -1,6 +1,6 @@
 {
   "name": "cuddles",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "Bridge between node streams and bacon streams",
   "main": "index.js",
   "scripts": {

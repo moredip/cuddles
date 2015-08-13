@@ -57,16 +57,9 @@ module.exports = function(Bacon){
     Bacon.fromNodeStream = fromNodeStream_MP;
   };
 
-  var monkeyPatchNodesStreams = function(streamModule){
-    streamModule.Readable.prototype.asBaconStream = function(){
-      return nodeToBacon(this);
-    }
-  }
-
   return {
     nodeToBacon: nodeToBacon,
     baconToNode: baconToNode,
-    monkeyPatchBacon: monkeyPatchBacon,
-    monkeyPatchNodesStreams: monkeyPatchNodesStreams
+    monkeyPatchBacon: monkeyPatchBacon
   };
 };

@@ -1,7 +1,6 @@
 'use strict';
 
 var through = require('through');
-var Stream = require('stream');
 
 module.exports = function(Bacon){
   var nodeToBacon = function(nodeStream){
